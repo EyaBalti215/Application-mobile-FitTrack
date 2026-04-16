@@ -1,0 +1,249 @@
+{
+  "info": {
+    "name": "FitTrack API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:8082"
+    },
+    {
+      "key": "mobileBaseUrl",
+      "value": "http://192.168.100.83:8082"
+    },
+    {
+      "key": "testEmail",
+      "value": "eya@test.com"
+    },
+    {
+      "key": "testPassword",
+      "value": "123456"
+    },
+    {
+      "key": "token",
+      "value": ""
+    },
+    {
+      "key": "otpId",
+      "value": ""
+    },
+    {
+      "key": "otpCode",
+      "value": ""
+    },
+    {
+      "key": "resetLink",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Auth - Register",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": "{{baseUrl}}/api/auth/register",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Eya\",\n  \"email\": \"{{testEmail}}\",\n  \"password\": \"{{testPassword}}\",\n  \"weightKg\": 60,\n  \"heightCm\": 165,\n  \"age\": 22\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Register success', function () {",
+              "  pm.expect(pm.response.code).to.be.oneOf([200, 400]);",
+              "});"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth - Login (get OTP)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": "{{baseUrl}}/api/auth/login",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{testEmail}}\",\n  \"password\": \"{{testPassword}}\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const data = pm.response.json();",
+              "if (data && data.otpId) {",
+              "  pm.collectionVariables.set('otpId', data.otpId);",
+              "  if (data.otpCode) pm.collectionVariables.set('otpCode', data.otpCode);",
+              "}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth - Verify OTP (get JWT)",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": "{{baseUrl}}/api/auth/verify-otp",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"otpId\": {{otpId}},\n  \"code\": \"{{otpCode}}\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const data = pm.response.json();",
+              "if (data && data.token) {",
+              "  pm.collectionVariables.set('token', data.token);",
+              "}"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth - Forgot Password",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": "{{baseUrl}}/api/auth/forgot-password",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"{{testEmail}}\"\n}"
+        }
+      },
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const data = pm.response.json();",
+              "if (data && data.otpId) pm.collectionVariables.set('otpId', data.otpId);",
+              "if (data && data.otpCode) pm.collectionVariables.set('otpCode', data.otpCode);",
+              "if (data && data.resetLink) pm.collectionVariables.set('resetLink', data.resetLink);"
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "name": "Auth - Reset Password",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" }
+        ],
+        "url": "{{baseUrl}}/api/auth/reset-password",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"otpId\": {{otpId}},\n  \"code\": \"{{otpCode}}\",\n  \"newPassword\": \"{{testPassword}}\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Profile - Get",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": "{{baseUrl}}/api/profile"
+      }
+    },
+    {
+      "name": "Profile - Update",
+      "request": {
+        "method": "PUT",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": "{{baseUrl}}/api/profile",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Eya\",\n  \"weightKg\": 61,\n  \"heightCm\": 165,\n  \"age\": 22,\n  \"avatarUrl\": \"\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Activities - List",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": "{{baseUrl}}/api/activities"
+      }
+    },
+    {
+      "name": "Activities - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": "{{baseUrl}}/api/activities",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"type\": \"RUNNING\",\n  \"durationMinutes\": 45,\n  \"distanceKm\": 6.2,\n  \"date\": \"2026-03-18\",\n  \"notes\": \"Evening run\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Goals - List",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": "{{baseUrl}}/api/goals"
+      }
+    },
+    {
+      "name": "Goals - Create",
+      "request": {
+        "method": "POST",
+        "header": [
+          { "key": "Content-Type", "value": "application/json" },
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": "{{baseUrl}}/api/goals",
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"type\": \"DISTANCE_KM\",\n  \"period\": \"WEEKLY\",\n  \"targetValue\": 20,\n  \"startDate\": \"2026-03-18\"\n}"
+        }
+      }
+    },
+    {
+      "name": "Stats - Get",
+      "request": {
+        "method": "GET",
+        "header": [
+          { "key": "Authorization", "value": "Bearer {{token}}" }
+        ],
+        "url": "{{baseUrl}}/api/stats"
+      }
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+{
+  "folders": [
+    {
+      "path": "backend"
+    },
+    {
+      "path": "fittrack-mobile"
+    }
+  ],
+  "settings": {
+    "java.import.maven.enabled": true,
+    "java.configuration.updateBuildConfiguration": "automatic",
+    "java.import.exclusions": [
+      "**/node_modules/**",
+      "**/.expo/**"
+    ]
+  }
+}

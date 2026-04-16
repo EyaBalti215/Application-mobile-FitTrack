@@ -1,0 +1,52 @@
+server:
+  address: 0.0.0.0
+  port: ${SERVER_PORT:8082}
+
+spring:
+  config:
+    import: optional:file:.env[.properties],optional:file:.env.local[.properties],optional:file:backend/.env[.properties],optional:file:backend/.env.local[.properties]
+  datasource:
+    url: ${DB_URL:jdbc:mysql://localhost:3306/fittrack_db?allowPublicKeyRetrieval=true&useSSL=false&serverTimezone=UTC}
+    username: ${DB_USERNAME:root}
+    password: ${DB_PASSWORD:}
+  jpa:
+    hibernate:
+      ddl-auto: update
+    open-in-view: false
+    properties:
+      hibernate:
+        format_sql: true
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    locations: classpath:db/migration
+    connect-retries: ${FLYWAY_CONNECT_RETRIES:10}
+  mail:
+    host: ${MAIL_HOST:smtp.ethereal.email}
+    port: ${MAIL_PORT:587}
+    username: ${MAIL_USERNAME:}
+    password: ${MAIL_PASSWORD:}
+    properties:
+      mail:
+        smtp:
+          auth: ${MAIL_SMTP_AUTH:true}
+          connectiontimeout: ${MAIL_SMTP_CONNECTION_TIMEOUT:5000}
+          timeout: ${MAIL_SMTP_TIMEOUT:5000}
+          writetimeout: ${MAIL_SMTP_WRITE_TIMEOUT:5000}
+          starttls:
+            enable: ${MAIL_STARTTLS_ENABLE:true}
+
+app:
+  jwt:
+    secret: change-this-secret-at-least-32-chars
+    expiration-minutes: 120
+  mail:
+    fail-on-error: ${MAIL_FAIL_ON_ERROR:true}
+  otp:
+    length: ${OTP_LENGTH:6}
+    ttl-minutes: ${OTP_TTL_MINUTES:10}
+    sender: ${MAIL_FROM:${MAIL_USERNAME:no-reply@fittrack.local}}
+    return-code-in-response: ${OTP_RETURN_CODE_IN_RESPONSE:false}
+  password-reset:
+    url-template: ${PASSWORD_RESET_URL_TEMPLATE:https://fittrack.local/reset-password?otpId={otpId}&code={code}}
+    return-link-in-response: ${PASSWORD_RESET_RETURN_LINK_IN_RESPONSE:false}

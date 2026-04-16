@@ -1,0 +1,24 @@
+# Root environment files
+.env
+.env.local
+
+# Operating system
+.DS_Store
+Thumbs.db
+.github/
+# Editor
+.vscode/*
+!.vscode/settings.json
+
+# Logs
+*.log
+
+# Build output
+backend/target/
+
+# Node dependencies (extra safety at workspace level)
+fittrack-mobile/node_modules/
+
+# Expo local files
+fittrack-mobile/.expo/
+fittrack-mobile/web-build/
