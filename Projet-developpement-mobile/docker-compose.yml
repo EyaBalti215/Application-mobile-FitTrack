@@ -1,7 +1,7 @@
 services:
   db:
     image: mysql:8.4
-    container_name: fittrack-mysql
+    container_name: fittrack-mysql1
     restart: unless-stopped
     environment:
       MYSQL_DATABASE: ${MYSQL_DATABASE:-fittrack_db}
@@ -22,7 +22,7 @@ services:
     build:
       context: ./backend
       dockerfile: Dockerfile
-    container_name: fittrack-backend
+    container_name: fittrack-backend1
     restart: unless-stopped
     depends_on:
       db:
@@ -51,9 +51,9 @@ services:
 
   frontend:
     build:
-      context: ./fittrack-mobile
+      context: ./fittrack-mobile1
       dockerfile: Dockerfile
-    container_name: fittrack-mobile-web
+    container_name: fittrack-mobile-web1
     restart: unless-stopped
     depends_on:
       - backend
@@ -66,7 +66,7 @@ services:
     ports:
       - "${FRONTEND_PORT:-19006}:19006"
     volumes:
-      - ./fittrack-mobile:/app
+      - ./fittrack-mobile1:/app
       - /app/node_modules
     command: ["npx", "expo", "start", "--web", "--host", "lan", "--port", "19006"]
 
