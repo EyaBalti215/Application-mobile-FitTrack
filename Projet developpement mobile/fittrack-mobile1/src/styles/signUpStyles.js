@@ -1,0 +1,200 @@
+﻿import { StyleSheet } from 'react-native';
+
+export const signUpStyles = StyleSheet.create({
+  screen: {
+    flex: 1,
+    backgroundColor: '#F4F2F7',
+  },
+  content: {
+    paddingHorizontal: 16,
+    paddingTop: 12,
+    paddingBottom: 28,
+    gap: 18,
+  },
+  backButton: {
+    alignSelf: 'flex-start',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: '#FFFFFF',
+    borderRadius: 999,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderWidth: 1,
+    borderColor: '#E4E8F1',
+  },
+  backButtonText: {
+    fontFamily: 'Poppins_600SemiBold',
+    fontSize: 11,
+    color: '#1F2937',
+  },
+  heroCard: {
+    borderRadius: 26,
+    padding: 18,
+  },
+  logoRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 12,
+  },
+  logoBadge: {
+    width: 38,
+    height: 38,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logoTitle: {
+    fontFamily: 'Poppins_700Bold',
+    fontSize: 15,
+    color: '#FFFFFF',
+  },
+  logoSubtitle: {
+    marginTop: 2,
+    fontFamily: 'Poppins_400Regular',
+    fontSize: 11,
+    color: '#F6EFFF',
+  },
+  heroTitle: {
+    marginTop: 18,
+    fontFamily: 'Poppins_700Bold',
+    fontSize: 18,
+    lineHeight: 28,
+    color: '#FFFFFF',
+  },
+  heroSubtitle: {
+    marginTop: 8,
+    fontFamily: 'Poppins_400Regular',
+    fontSize: 12,
+    lineHeight: 19,
+    color: '#F6EFFF',
+  },
+  featureList: {
+    marginTop: 14,
+    gap: 12,
+  },
+  featureCard: {
+    flexDirection: 'row',
+    gap: 12,
+    backgroundColor: 'rgba(255, 255, 255, 0.16)',
+    borderRadius: 16,
+    padding: 12,
+  },
+  featureIcon: {
+    width: 36,
+    height: 36,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  pinkIcon: {
+    backgroundColor: '#E6468F',
+  },
+  orangeIcon: {
+    backgroundColor: '#FF6A3D',
+  },
+  redIcon: {
+    backgroundColor: '#FF4D00',
+  },
+  featureTextWrap: {
+    flex: 1,
+  },
+  featureTitle: {
+    fontFamily: 'Poppins_600SemiBold',
+    fontSize: 13,
+    color: '#FFFFFF',
+  },
+  featureBody: {
+    marginTop: 4,
+    fontFamily: 'Poppins_400Regular',
+    fontSize: 11,
+    lineHeight: 17,
+    color: '#F6EFFF',
+  },
+  formCard: {
+    backgroundColor: '#FFFFFF',
+    borderRadius: 22,
+    padding: 18,
+    shadowColor: '#1A2032',
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.14,
+    shadowRadius: 18,
+    elevation: 8,
+  },
+  progressTrack: {
+    height: 6,
+    backgroundColor: '#E8E4F1',
+    borderRadius: 999,
+    overflow: 'hidden',
+  },
+  progressFill: {
+    height: 6,
+    width: '56%',
+    borderRadius: 999,
+  },
+  formTitle: {
+    marginTop: 16,
+    fontFamily: 'Poppins_700Bold',
+    fontSize: 16,
+    color: '#101828',
+  },
+  formSubtitle: {
+    marginTop: 6,
+    fontFamily: 'Poppins_400Regular',
+    fontSize: 12,
+    color: '#566176',
+  },
+  field: {
+    marginTop: 14,
+  },
+  label: {
+    fontFamily: 'Poppins_600SemiBold',
+    fontSize: 11,
+    color: '#2B3648',
+  },
+  inputWrap: {
+    marginTop: 8,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    borderWidth: 1,
+    borderColor: '#E4E8F1',
+    borderRadius: 14,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+  },
+  input: {
+    flex: 1,
+    fontFamily: 'Poppins_400Regular',
+    fontSize: 12,
+    color: '#1E293B',
+  },
+  submitButtonWrap: {
+    marginTop: 18,
+  },
+  submitButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: 8,
+    borderRadius: 16,
+    paddingVertical: 12,
+  },
+  submitText: {
+    fontFamily: 'Poppins_600SemiBold',
+    fontSize: 13,
+    color: '#FFFFFF',
+  },
+  signInText: {
+    marginTop: 14,
+    textAlign: 'center',
+    fontFamily: 'Poppins_400Regular',
+    fontSize: 11,
+    color: '#6B7280',
+  },
+  signInLink: {
+    fontFamily: 'Poppins_600SemiBold',
+    color: '#7A30FF',
+  },
+});
+
